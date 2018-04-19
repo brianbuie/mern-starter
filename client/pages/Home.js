@@ -4,7 +4,7 @@ import HomeIcon from '../assets/home.svg';
 
 const Headline = styled.h1`
   font-family: sans-serif;
-  color: #eb6f5a;
+  color: ${props => props.theme.primary};
 `;
 
 const Container = styled.div`
