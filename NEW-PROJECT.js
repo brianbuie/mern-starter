@@ -11,7 +11,7 @@ const fs = require('fs');
 
 // remove package.json entries
 let pkg = JSON.parse(fs.readFileSync('./package.json'));
-delete pkg.scripts.new - project;
+delete pkg.scripts['new-project'];
 delete pkg.devDependencies.rimraf;
 delete pkg.repository;
 fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2) + '\n');
