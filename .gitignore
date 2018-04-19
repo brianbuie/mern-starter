@@ -1,0 +1,4 @@
+node_modules/*
+client/dist/*
+yarn-error.log
+variables.env

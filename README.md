@@ -1,20 +1,19 @@
+## What it do
+
+This is my simple starter for the MERN stack I inevitably fall back on. I may start out with something different, but it always evolves to this.
+
+It has some opinionated basics in it already, including Mongoose & Passport for Auth and styled-components for CSS
+
 ## Quick Start
 
 In the terminal (with yarn installed globally):
 
-`git clone git@github.com:brianbuie/webpack-starter.git "New Project" && cd "New Project" && yarn install && yarn new-project`
+`git clone git@github.com:brianbuie/mern-starter.git "New Project" && cd "New Project" && yarn install && yarn new-project`
 
-This will clone the repo, install dependencies, and remove the git repo
+This will clone the repo, install dependencies, remove the git repo, remove the NEW-PROJECT.js script, and remove the "new-project" script entry in package.json
 
-For quick future projects, I've added this alias to my ~/.bash_profile
+## TODO
 
-`alias new-webpack-project='git clone git@github.com:brianbuie/webpack-starter.git "New Project" && cd "New Project" && yarn install && yarn new-project'`
+Create a bash script to allow `new-mern-project [name]` (currently creates a "New Project" folder)
 
-then I just type `new-webpack-project` in the terminal and BAM!
-
-## Why?
-
-Whenever I have a quick idea or want to screw around with something, I hate NOT using webpack, but I also hate setting up webpack fresh.
-
-I also don't like using starter-packs that are already full of stuff. This is intended to make it easy to init and start adding the packages I need for the project.
-
+test build/deployment and add script
