@@ -16,7 +16,7 @@ In the terminal (with yarn installed globally):
 
 `git clone git@github.com:brianbuie/mern-starter.git "New Project" && cd "New Project" && yarn install && yarn new-project`
 
-This will clone the repo, install dependencies, remove the git repo, remove the NEW-PROJECT.js script, and remove the "new-project" script entry in package.json
+This will clone the repo, install dependencies, remove the git repo, remove the NEW-PROJECT.js script, and remove all evidence in package.json
 
 ## TODO
 
