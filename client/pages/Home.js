@@ -4,6 +4,7 @@ import HomeIcon from '../assets/home.svg';
 
 const Headline = styled.h1`
   font-family: sans-serif;
+  color: #eb6f5a;
 `;
 
 const Container = styled.div`
@@ -16,7 +17,7 @@ const Container = styled.div`
 const Home = () => (
   <Container>
     <HomeIcon />
-    <Headline>Welcome</Headline>
+    <Headline>Home</Headline>
   </Container>
 );
 

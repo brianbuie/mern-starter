@@ -49,6 +49,15 @@ api.use((req, res, next) => {
 });
 
 /*
+  DevServer
+*/
+if (api.get('env') === 'development') {
+  const proxy = require('proxy-middleware');
+  const url = require('url');
+  api.use('/dist', proxy(url.parse(`http://localhost:${process.env.WEBPACK_PORT}/dist`)));
+}
+
+/*
   Request parsing
 */
 const bodyParser = require('body-parser');
@@ -66,4 +75,4 @@ api.use('/api', require('./api'));
 /*
   Listen
 */
-api.listen(process.env.PORT, () => console.log(`Server available on port ${process.env.PORT}`));
+api.listen(process.env.PORT, () => console.log(`Express running → PORT ${process.env.PORT}`));

@@ -6,7 +6,7 @@
   "repository": "git@github.com:brianbuie/mern-starter.git",
   "scripts": {
     "new-project": "node NEW-PROJECT.js",
-    "dev": "concurrently 'pm2 start ecosystem.config.js -s --no-daemon' 'webpack-dev-server --config webpack.dev.js'",
+    "dev": "pm2 start pm2.config.js -s --no-daemon",
     "build": "webpack --config webpack.prod.js"
   },
   "devDependencies": {
@@ -22,7 +22,6 @@
     "rimraf": "^2.6.2",
     "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^4.1.1",
-    "webpack-bundle-size-analyzer": "^2.7.0",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.0",
     "webpack-merge": "^4.1.2"
