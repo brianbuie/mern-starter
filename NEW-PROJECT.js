@@ -26,5 +26,5 @@ pathsToRemove.map(removePath);
 removePackageJsonEntry('scripts', 'new-project');
 removePackageJsonEntry('devDependencies', 'rimraf');
 removePackageJsonEntry('repository');
-fs.createReadStrem('variables.env.example').pipe(fs.createWriteStream('variables.env'));
+fs.createReadStream('variables.env.example').pipe(fs.createWriteStream('variables.env'));
 console.log('New Project ready. You should git init!');
