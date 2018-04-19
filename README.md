@@ -18,8 +18,10 @@ In the terminal (with yarn installed globally):
 
 This will clone the repo, install dependencies, remove the git repo, remove the NEW-PROJECT.js script, remove all evidence in package.json, and create a variables.env file from the example
 
+I have this aliased in my ~/.bash_profile like so:
+
+`alias new-mern-project='git clone git@github.com:brianbuie/mern-starter.git "New Project" && cd "New Project" && yarn install && yarn new-project'`
+
 ## TODO
 
 Create a bash script to allow `new-mern-project [name]` (currently creates a "New Project" folder)
-
-test build/deployment and add script
