@@ -2,29 +2,22 @@
 const rimraf = require('rimraf');
 const fs = require('fs');
 
-const pathsToRemove = ['./.git', './NEW-PROJECT.js', './README.md'];
-
-const removePath = path => {
-  rimraf(path, error => {
-    if (error) throw new Error(error);
+// delete files
+['./.git', './NEW-PROJECT.js', './README.md'].forEach(path => {
+  rimraf(path, err => {
+    if (err) throw new Error(err);
   });
-};
+});
 
-function removePackageJsonEntry(path1, path2) {
-  const packageJsonPath = './package.json';
-  let fileData = fs.readFileSync(packageJsonPath);
-  let content = JSON.parse(fileData);
-  if (path1 && path2) {
-    delete content[path1][path2];
-  } else {
-    delete content[path1];
-  }
-  fs.writeFileSync(packageJsonPath, JSON.stringify(content, null, 2) + '\n');
-}
+// remove package.json entries
+let pkg = JSON.parse(fs.readFileSync('./package.json'));
+delete pkg.scripts.new - project;
+delete pkg.devDependencies.rimraf;
+delete pkg.repository;
+fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2) + '\n');
 
-pathsToRemove.map(removePath);
-removePackageJsonEntry('scripts', 'new-project');
-removePackageJsonEntry('devDependencies', 'rimraf');
-removePackageJsonEntry('repository');
-fs.createReadStream('variables.env.example').pipe(fs.createWriteStream('variables.env'));
+// copy example file to new variables.env file
+fs.createReadStream('./variables.env.example').pipe(fs.createWriteStream('./variables.env'));
+
+// Done
 console.log('New Project ready. You should git init!');
