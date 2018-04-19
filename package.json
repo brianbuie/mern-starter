@@ -7,7 +7,8 @@
   "scripts": {
     "new-project": "node NEW-PROJECT.js",
     "dev": "pm2 start pm2.config.js -s --no-daemon",
-    "build": "webpack --config webpack.prod.js"
+    "prod": "webpack --config webpack.prod.js && pm2 start ./server/start.js --name server",
+    "deploy": "git pull origin master && webpack --config webpack.prod.js && pm2 restart server"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
