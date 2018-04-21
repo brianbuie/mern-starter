@@ -18,9 +18,9 @@ const registerFields = [
 const Login = () => (
   <div>
     <h1>Login</h1>
-    <Form fields={loginFields} submit={data => post('/api/auth/login', data)} />
+    <Form fields={loginFields} submit={data => post('/api/account/login', data)} />
     <h1>Register</h1>
-    <Form fields={registerFields} submit={data => post('/api/auth/register', data)} />
+    <Form fields={registerFields} submit={data => post('/api/account/register', data)} />
   </div>
 );
 

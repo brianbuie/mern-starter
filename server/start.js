@@ -36,9 +36,9 @@ if (api.get('env') === 'development') {
 }
 
 /*
-  Auth
+  Users
 */
-api.use(require('@server/auth'));
+api.use(require('@server/users'));
 
 /*
   App

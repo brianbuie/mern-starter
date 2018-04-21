@@ -31,6 +31,6 @@ auth.use((req, res, next) => {
   next();
 });
 
-auth.use('/api/auth', require('./authRouter'));
+auth.use('/api/account', require('./accountRouter'));
 
 module.exports = auth;
