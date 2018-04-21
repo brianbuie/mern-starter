@@ -5,12 +5,11 @@ injectGlobal`
   html {
     font-size: 16px;
     font-family: sans-serif;
+    background-color: #eee;
   }
 
   body {
-    min-height: 100vh;
     margin: 0;
-    background-color: #eee;
   }
 `;
 
