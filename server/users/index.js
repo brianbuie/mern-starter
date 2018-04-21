@@ -31,6 +31,13 @@ auth.use((req, res, next) => {
   next();
 });
 
-auth.use('/api/account', require('./accountRouter'));
+const account = require('./account');
+const validate = require('./validation');
+auth.post('/account/login', account.login);
+auth.post('/account/logout', account.logout);
+auth.post('/account/register', validate.register, validate.results, account.register, account.login);
+auth.post('/account/forgot-password', validate.forgotPassword, validate.results, account.createResetToken);
+auth.post('/account/validate-token', validate.resetToken, validate.results, validate.send);
+auth.post('/account/reset-password', validate.updatePassword, validate.results, account.updatePassword);
 
 module.exports = auth;
