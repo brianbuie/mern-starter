@@ -1,11 +1,13 @@
 /*
   Init
 */
+require('module-alias/register');
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '..', 'variables.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '../variables.env') });
 const express = require('express');
 require('express-async-errors');
 const api = express();
+api.use(require('helmet')());
 
 /*
   Database
@@ -16,37 +18,13 @@ mongoose.Promise = global.Promise;
 mongoose.connection.on('error', console.error);
 
 /*
-  Users
+  Request parsing
 */
-require('./models/User');
-const passport = require('passport');
-const User = mongoose.model('User');
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-/*
-  Sessions
-*/
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const sessionStore = new MongoStore({ mongooseConnection: mongoose.connection });
-api.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    key: process.env.SESSION_KEY,
-    resave: false,
-    saveUninitialized: false,
-    store: sessionStore
-  })
-);
-api.use(passport.initialize());
-api.use(passport.session());
-const { promisify } = require('es6-promisify');
-api.use((req, res, next) => {
-  req.login = promisify(req.login);
-  next();
-});
+const bodyParser = require('body-parser');
+api.use(bodyParser.json());
+api.use(bodyParser.urlencoded({ extended: true }));
+api.use(require('express-query-int')());
+api.use(require('express-query-boolean')());
 
 /*
   DevServer
@@ -58,21 +36,24 @@ if (api.get('env') === 'development') {
 }
 
 /*
-  Request parsing
+  Auth
 */
-const bodyParser = require('body-parser');
-api.use(bodyParser.json());
-api.use(bodyParser.urlencoded({ extended: true }));
-api.use(require('express-query-int')());
-api.use(require('express-query-boolean')());
-api.use(express.static(path.resolve(__dirname, '..', 'public')));
+api.use(require('@server/auth'));
 
 /*
   App
 */
-api.use('/api', require('./api'));
+api.use('/api', require('@server/api'));
+
+/*
+  Static Files
+*/
+api.use(express.static(path.resolve(__dirname, '../public')));
+api.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/index.html'));
+});
 
 /*
   Listen
 */
-api.listen(process.env.PORT, () => console.log(`Express running → PORT ${process.env.PORT}`));
+api.listen(process.env.PORT, () => console.log(`App available on PORT ${process.env.PORT}`));

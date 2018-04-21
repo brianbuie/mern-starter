@@ -1,25 +1,25 @@
 const mongoose = require('mongoose');
-const mongodbErrorHandler = require('mongoose-mongodb-errors');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
+    lowercase: true,
     unique: true,
-    required: 'Please supply a username',
     trim: true
+  },
+  displayName: {
+    type: String
   },
   email: {
     type: String,
     lowercase: true,
-    trim: true,
-    required: 'Please Supply an email address'
+    trim: true
   },
   resetPasswordToken: String,
   resetPasswordExpires: Date
 });
 
 userSchema.plugin(passportLocalMongoose, { usernameLowerCase: true });
-userSchema.plugin(mongodbErrorHandler);
 
 module.exports = mongoose.model('User', userSchema);

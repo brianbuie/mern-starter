@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import HomeIcon from '../assets/home.svg';
 
 const Headline = styled.h1`
-  font-family: sans-serif;
   color: ${props => props.theme.primary};
 `;
 

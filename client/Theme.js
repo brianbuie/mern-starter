@@ -4,6 +4,7 @@ import { injectGlobal, ThemeProvider } from 'styled-components';
 injectGlobal`
   html {
     font-size: 16px;
+    font-family: sans-serif;
   }
 
   body {

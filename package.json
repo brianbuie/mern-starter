@@ -10,6 +10,12 @@
     "prod": "webpack --config webpack.prod.js && pm2 start ./server/start.js --name server",
     "deploy": "git pull origin master && webpack --config webpack.prod.js && pm2 restart server"
   },
+  "_moduleAliases": {
+    "@server": "server",
+    "@client": "client",
+    "@public": "public",
+    "@root": "."
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -39,13 +45,14 @@
     "express-query-boolean": "^2.0.0",
     "express-query-int": "^3.0.0",
     "express-session": "^1.15.6",
+    "helmet": "^3.12.0",
     "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.5",
     "memory-cache": "^0.2.0",
+    "module-alias": "^2.0.6",
     "moment": "^2.22.0",
     "mongoose": "^5.0.14",
-    "mongoose-mongodb-errors": "^0.0.2",
     "passport": "^0.4.0",
     "passport-local-mongoose": "^5.0.0",
     "proxy-middleware": "^0.15.0",
