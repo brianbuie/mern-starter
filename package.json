@@ -35,7 +35,6 @@
   },
   "dependencies": {
     "body-parser": "^1.18.2",
-    "brain.js": "^1.1.2",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
     "dotenv": "^5.0.1",
@@ -48,10 +47,7 @@
     "express-validator": "^5.1.2",
     "helmet": "^3.12.0",
     "history": "^4.7.2",
-    "lodash": "^4.17.5",
-    "memory-cache": "^0.2.0",
     "module-alias": "^2.0.6",
-    "moment": "^2.22.0",
     "mongoose": "^5.0.14",
     "passport": "^0.4.0",
     "passport-local-mongoose": "^5.0.0",
