@@ -17,13 +17,13 @@ class Form extends React.Component {
     });
   };
 
-  submitForm = e => {
+  submit = e => {
     e.preventDefault();
     this.props.submit({ ...this.state });
   };
 
   render = () => (
-    <form onSubmit={this.submitForm}>
+    <form onSubmit={this.submit}>
       {this.props.fields.map(field => (
         <div key={field.name}>
           {field.label ? <label htmlFor={field.name}>{field.label}</label> : ''}
