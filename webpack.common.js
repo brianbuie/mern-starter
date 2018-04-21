@@ -7,8 +7,11 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
+    alias: {
+      '@app': path.resolve(__dirname, 'client')
+    },
     mainFiles: ['index'],
-    modules: [path.resolve('./client'), 'node_modules']
+    modules: ['node_modules']
   },
   module: {
     rules: [

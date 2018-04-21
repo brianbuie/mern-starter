@@ -10,12 +10,6 @@
     "prod": "webpack --config webpack.prod.js && pm2 start ./server/start.js --name server",
     "deploy": "git pull origin master && webpack --config webpack.prod.js && pm2 restart server"
   },
-  "_moduleAliases": {
-    "@server": "server",
-    "@client": "client",
-    "@public": "public",
-    "@root": "."
-  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",

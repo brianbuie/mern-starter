@@ -1,9 +1,14 @@
 /*
   Init
 */
-require('module-alias/register');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../variables.env') });
+const moduleAliases = require('module-alias');
+moduleAliases.addAlias('@api', __dirname);
+
+/*
+  Express
+*/
 const express = require('express');
 require('express-async-errors');
 const api = express();
@@ -36,14 +41,9 @@ if (api.get('env') === 'development') {
 }
 
 /*
-  Users
-*/
-api.use(require('@server/users'));
-
-/*
   App
 */
-api.use('/api', require('@server/api'));
+api.use('/api', require('./api'));
 
 /*
   Static Files

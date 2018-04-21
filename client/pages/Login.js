@@ -1,6 +1,6 @@
 import React from 'react';
-import Form from 'components/Form';
-import { post } from 'utils/fetch';
+import Form from '@app/components/Form';
+import { post } from '@app/utils/fetch';
 
 // prettier-ignore
 const loginFields = [
