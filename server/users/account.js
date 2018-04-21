@@ -1,6 +1,7 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 const crypto = require('crypto');
+const { promisify } = require('es6-promisify');
 const { pick } = require('lodash');
 const email = require('./email');
 
@@ -35,7 +36,7 @@ exports.register = async (req, res, next) => {
 
 exports.createResetToken = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  user.resetPasswordToken = crypto.createHash('sha1');
+  user.resetPasswordToken = crypto.createHash('md5').digest('hex');
   user.resetPasswordExpires = Date.now() + 3600000;
   await user.save();
   const resetURL = `http://${req.headers.host}/account/reset-password?token=${user.resetPasswordToken}`;
@@ -50,8 +51,9 @@ exports.createResetToken = async (req, res) => {
 };
 
 exports.updatePassword = async (req, res) => {
-  const setPassword = promisify(user.setPassword);
-  await setPassword(req.body.password);
+  const user = await User.findOne({ resetPasswordToken: req.body.token });
+  user.setPassword = promisify(user.setPassword);
+  await user.setPassword(req.body.password);
   user.resetPasswordToken = undefined;
   user.resetPasswordExpires = undefined;
   const updatedUser = await user.save();

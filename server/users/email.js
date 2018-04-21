@@ -37,13 +37,13 @@ const passwordResetHTML = (options = {}) => `
     <p>You have requested a password reset. Please click <a href="${
       options.resetURL
     }">here</a> to continue on with resetting your password or visit ${options.resetURL} in your browser.</p>
-    <p><strong>Please note this link is only valid for the next hour.<strong></p>
+    <p><strong>Please note this link is only valid for the next hour.</strong></p>
     <p>If you didn't request this email, please ignore it.</p>
   </body>
 </html>
 `;
 
-exports.sendPasswordReset = async options => {
+exports.sendPasswordReset = options => {
   const html = passwordResetHTML(options);
   const text = htmlToText.fromString(html);
   const mailOptions = {
@@ -53,6 +53,6 @@ exports.sendPasswordReset = async options => {
     html,
     text
   };
-  const sendMail = promisify(transport.sendMail);
-  return sendMail(mailOptions);
+  transport.sendMail = promisify(transport.sendMail);
+  return transport.sendMail(mailOptions);
 };
