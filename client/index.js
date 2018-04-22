@@ -4,14 +4,17 @@ import { Router } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import Theme from '@app/Theme';
 import App from '@app/App';
+import { AccountProvider } from '@app/account/AccountContext';
 
 const history = createBrowserHistory();
 
 ReactDOM.render(
-  <Router history={history}>
-    <Theme>
-      <App />
-    </Theme>
-  </Router>,
+  <AccountProvider>
+    <Router history={history}>
+      <Theme>
+        <App />
+      </Theme>
+    </Router>
+  </AccountProvider>,
   document.getElementById('root')
 );
