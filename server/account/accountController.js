@@ -7,10 +7,14 @@ const email = require('./email');
 
 const User = mongoose.model('User');
 
+exports.getUser = (req, res, next) => {
+  res.send(pick(req.user, ['displayName', 'email']));
+};
+
 exports.login = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) return next(err);
-    if (!user) return res.status(400).send();
+    if (!user) return res.status(400).json({ message: 'Oops, try again' });
     req.logIn(user, err => {
       if (err) return next(err);
       res.send(pick(user, ['displayName', 'email']));
@@ -20,7 +24,7 @@ exports.login = (req, res, next) => {
 
 exports.logout = (req, res) => {
   req.logout();
-  res.send();
+  res.json({ message: 'logged out' });
 };
 
 exports.register = async (req, res, next) => {
@@ -47,7 +51,7 @@ exports.createResetToken = async (req, res) => {
       resetURL
     })
     .catch(console.error);
-  return res.send();
+  return res.json({ message: 'Password reset sent, check your e-mail for the link' });
 };
 
 exports.updatePassword = async (req, res) => {
@@ -58,5 +62,5 @@ exports.updatePassword = async (req, res) => {
   user.resetPasswordExpires = undefined;
   const updatedUser = await user.save();
   await req.login(updatedUser);
-  return res.send({ message: 'Password Reset', user: updatedUser });
+  res.send(pick(updatedUser, ['displayName', 'email']));
 };

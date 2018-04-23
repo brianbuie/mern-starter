@@ -22,10 +22,8 @@ export const LoginForm = () => (
             { name: 'username', label: 'Username', type: 'text' },
             { name: 'password', label: 'Password', type: 'password' }
           ]}
-          submit={async data => {
-            const user = await post('/api/account/login', data).then(res => res.json());
-            if (user) login(user);
-          }}
+          action="/api/account/login"
+          onSuccess={login}
         />
         <Link to="/account/register">Register</Link>
         <Link to="/account/forgot-password">Forgot Password</Link>
@@ -35,28 +33,30 @@ export const LoginForm = () => (
 );
 
 export const RegisterForm = () => (
-  <AccountForm>
-    <h1>Register</h1>
-    <Form
-      fields={[
-        { name: 'username', label: 'Username', type: 'text' },
-        { name: 'email', label: 'Email', type: 'email' },
-        { name: 'password', label: 'Password', type: 'password' },
-        { name: 'confirm-password', label: 'Again', type: 'password' }
-      ]}
-      submit={data => post('/api/account/register', data)}
-    />
-    <Link to="/account/login">Login</Link>
-  </AccountForm>
+  <Account.Consumer>
+    {({ actions: { login } }) => (
+      <AccountForm>
+        <h1>Register</h1>
+        <Form
+          fields={[
+            { name: 'username', label: 'Username', type: 'text' },
+            { name: 'email', label: 'Email', type: 'email' },
+            { name: 'password', label: 'Password', type: 'password' },
+            { name: 'confirm-password', label: 'Again', type: 'password' }
+          ]}
+          action="/api/account/register"
+          onSuccess={login}
+        />
+        <Link to="/account/login">Login</Link>
+      </AccountForm>
+    )}
+  </Account.Consumer>
 );
 
 export const ForgotPasswordForm = () => (
   <AccountForm>
     <h1>Forgot Password</h1>
-    <Form
-      fields={[{ name: 'email', label: 'Email', type: 'email' }]}
-      submit={data => post('/api/account/forgot-password', data)}
-    />
+    <Form fields={[{ name: 'email', label: 'Email', type: 'email' }]} action="/api/account/forgot-password" />
     <Link to="/account/login">Login</Link>
   </AccountForm>
 );
@@ -70,7 +70,7 @@ export const ResetPasswordForm = ({ location }) => (
         { name: 'confirm-password', label: 'Again', type: 'password' },
         { name: 'token', type: 'hidden', value: queryString.parse(location.search).token }
       ]}
-      submit={data => post('/api/account/reset-password', data)}
+      action="/api/account/reset-password"
     />
     <Link to="/account/login">Login</Link>
   </AccountForm>

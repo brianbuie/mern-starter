@@ -52,7 +52,7 @@ const newPassword = [
     .withMessage('Please confirm your password'),
   body('confirm-password')
     .custom((value, { req }) => value === req.body.password)
-    .withMessage("Passwords don't match")
+    .withMessage("Your passwords don't match")
 ];
 
 const token = [
@@ -81,8 +81,11 @@ exports.updatePassword = token.concat(newPassword);
 
 exports.results = (req, res, next) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) return res.status(400).json(errors.array());
-  next();
+  if (errors.isEmpty()) return next();
+  res.status(400).json({
+    message: 'Oops, try again.',
+    fields: errors.array()
+  });
 };
 
 exports.send = (req, res, next) => {
