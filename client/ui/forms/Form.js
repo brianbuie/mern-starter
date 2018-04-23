@@ -1,11 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import TextInput from './TextInput';
 import { post } from '@app/utils/fetch';
-
-const Feedback = styled.p`
-  color: red;
-  margin-top: 0;
-`;
 
 class Form extends React.Component {
   componentWillMount = () => {
@@ -33,9 +28,9 @@ class Form extends React.Component {
     if (!err.fields) return;
     err.fields.forEach(field => {
       this.setState({
-        [field.param]: {
-          ...this.state[field.param],
-          error: field.msg
+        [field.name]: {
+          ...this.state[field.name],
+          error: field.message
         }
       });
     });
@@ -56,11 +51,7 @@ class Form extends React.Component {
     this.state && (
       <form onSubmit={this.submit}>
         {this.props.fields.map(field => (
-          <div key={field.name}>
-            {field.label ? <label htmlFor={field.name}>{field.label}</label> : ''}
-            <input type={field.type} name={field.name} value={this.state[field.name].value} onChange={this.fieldChange} />
-            {this.state[field.name].error ? <Feedback>{this.state[field.name].error}</Feedback> : ''}
-          </div>
+          <TextInput key={field.name} {...field} {...this.state[field.name]} onChange={this.fieldChange} />
         ))}
         <button type="submit">{this.props.buttonText || 'Submit →'}</button>
       </form>

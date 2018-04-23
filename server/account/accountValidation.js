@@ -8,10 +8,10 @@ const username = [
   sanitizeBody('username').trim(),
   body('username')
     .isLength({ min: 3, max: 15 })
-    .withMessage('Usernames must be 3 to 15 characters'),
+    .withMessage('Usernames must be 3 to 15 characters.'),
   body('username')
     .custom(username => /^[a-zA-Z0-9-_]+$/g.test(username))
-    .withMessage('Usernames can only container letters, numbers, dashes, and underscores')
+    .withMessage('You can only use letters, numbers, and dashes.')
 ];
 
 const uniqueUsername = [
@@ -20,7 +20,7 @@ const uniqueUsername = [
       const taken = await User.findOne({ username: username.toLowerCase() });
       return !taken;
     })
-    .withMessage('That username is taken')
+    .withMessage('That username is taken.')
 ];
 
 const email = [
@@ -31,7 +31,7 @@ const email = [
   }),
   body('email')
     .isEmail()
-    .withMessage('Please provide a valid e-mail')
+    .withMessage("That's not a valid e-mail address.")
 ];
 
 const emailExists = [
@@ -40,19 +40,19 @@ const emailExists = [
       const valid = await User.findOne({ email });
       return !!valid;
     })
-    .withMessage('No user found with that e-mail address')
+    .withMessage('No user found with that e-mail address.')
 ];
 
 const newPassword = [
   body('password')
     .isLength({ min: 1 })
-    .withMessage('Please provide a password'),
+    .withMessage("You didn't provide a password."),
   body('confirm-password')
     .isLength({ min: 1 })
-    .withMessage('Please confirm your password'),
+    .withMessage('You need to confirm your password.'),
   body('confirm-password')
     .custom((value, { req }) => value === req.body.password)
-    .withMessage("Your passwords don't match")
+    .withMessage("Your passwords don't match.")
 ];
 
 const token = [
@@ -65,7 +65,7 @@ const token = [
       });
       return !!user;
     })
-    .withMessage('Password reset is invalid or has expired')
+    .withMessage('Password reset is invalid or has expired.')
 ];
 
 exports.register = username
@@ -82,9 +82,17 @@ exports.updatePassword = token.concat(newPassword);
 exports.results = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) return next();
+  let fields = {};
+  errors.array().forEach(field => {
+    if (!fields[field.param]) return (fields[field.param] = field.msg);
+    fields[field.param] += ' ' + field.msg;
+  });
   res.status(400).json({
     message: 'Oops, try again.',
-    fields: errors.array()
+    fields: Object.keys(fields).map(field => ({
+      name: field,
+      message: fields[field]
+    }))
   });
 };
 

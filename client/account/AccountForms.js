@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import queryString from 'query-string';
 import Link from '@app/utils/Link';
 import { Account } from './AccountContext';
-import Form from '@app/ui/Form';
+import Form from '@app/ui/forms/Form';
 import { post } from '@app/utils/fetch';
 
 const AccountForm = styled.div`
-  max-width: 500px;
+  max-width: 300px;
   margin: 200px auto;
   text-align: center;
 `;
