@@ -1,10 +1,11 @@
 import React from 'react';
 import Nav from '@app/ui/Nav';
-import AccountLink from '@app/Account/AccountLink';
+import ToastDisplay from '@app/Toasts/ToastDisplay';
 
 const Layout = ({ children }) => (
   <div>
     <Nav />
+    <ToastDisplay />
     {children}
   </div>
 );

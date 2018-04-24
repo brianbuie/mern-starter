@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { Account } from './AccountContext';
+import { Account } from './AccountState';
 import { LoginForm, RegisterForm, ForgotPasswordForm, ResetPasswordForm } from './AccountForms';
 import NotFound from '@app/Pages/NotFound';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '@app/utils/Link';
-import { Account } from './AccountContext';
+import { Account } from './AccountState';
 
 const AccountLink = () => (
   <Account.Consumer>

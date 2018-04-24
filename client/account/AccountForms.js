@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import queryString from 'query-string';
 import Link from '@app/utils/Link';
-import { Account } from './AccountContext';
+import { Account } from './AccountState';
+import { Toast } from '@app/Toasts/ToastState';
 import Form from '@app/Forms/Form';
 import { post } from '@app/utils/fetch';
 
@@ -13,23 +14,28 @@ const AccountForm = styled.div`
 `;
 
 export const LoginForm = () => (
-  <Account.Consumer>
-    {({ actions: { login } }) => (
-      <AccountForm>
-        <h1>Login</h1>
-        <Form
-          fields={[
-            { name: 'username', label: 'Username', type: 'text' },
-            { name: 'password', label: 'Password', type: 'password' }
-          ]}
-          action="/api/account/login"
-          onSuccess={login}
-        />
-        <Link to="/account/register">Register</Link>
-        <Link to="/account/forgot-password">Forgot Password</Link>
-      </AccountForm>
+  <Toast.Consumer>
+    {({ actions: { addToast } }) => (
+      <Account.Consumer>
+        {({ actions: { login } }) => (
+          <AccountForm>
+            <h1>Login</h1>
+            <Form
+              fields={[
+                { name: 'username', label: 'Username', type: 'text' },
+                { name: 'password', label: 'Password', type: 'password' }
+              ]}
+              action="/api/account/login"
+              onSuccess={login}
+              onError={addToast}
+            />
+            <Link to="/account/register">Register</Link>
+            <Link to="/account/forgot-password">Forgot Password</Link>
+          </AccountForm>
+        )}
+      </Account.Consumer>
     )}
-  </Account.Consumer>
+  </Toast.Consumer>
 );
 
 export const RegisterForm = () => (
