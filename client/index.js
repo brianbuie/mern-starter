@@ -2,19 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
-import ThemeProvider from '@app/Theme/ThemeProvider';
 import App from '@app/App';
-import { AccountProvider } from '@app/Account/AccountContext';
+import Context from '@app/Context';
 
 const history = createBrowserHistory();
 
 ReactDOM.render(
-  <AccountProvider>
+  <Context>
     <Router history={history}>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <App />
     </Router>
-  </AccountProvider>,
+  </Context>,
   document.getElementById('root')
 );
