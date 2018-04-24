@@ -1,5 +1,5 @@
 import React from 'react';
-import { injectGlobal, ThemeProvider } from 'styled-components';
+import { injectGlobal, ThemeProvider as Provider } from 'styled-components';
 
 injectGlobal`
   html {
@@ -18,10 +18,10 @@ const theme = {
 };
 
 // prettier-ignore
-const ThemeComponent = ({ children }) => (
-  <ThemeProvider theme={theme}>
+const ThemeProvider = ({ children }) => (
+  <Provider theme={theme}>
     {children}
-  </ThemeProvider>
+  </Provider>
 );
 
-export default ThemeComponent;
+export default ThemeProvider;

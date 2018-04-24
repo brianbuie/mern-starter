@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Layout from '@app/ui/Layout';
-import Home from '@app/pages/Home';
-import NotFound from '@app/pages/NotFound';
-import AccountRouter from '@app/account/AccountRouter';
+import Home from '@app/Pages/Home';
+import NotFound from '@app/Pages/NotFound';
+import AccountRouter from '@app/Account/AccountRouter';
 
 const App = () => (
   <Layout>

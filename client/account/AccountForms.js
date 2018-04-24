@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import queryString from 'query-string';
 import Link from '@app/utils/Link';
 import { Account } from './AccountContext';
-import Form from '@app/ui/forms/Form';
+import Form from '@app/Forms/Form';
 import { post } from '@app/utils/fetch';
 
 const AccountForm = styled.div`
