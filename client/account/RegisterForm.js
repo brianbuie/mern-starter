@@ -4,8 +4,9 @@ import Link from '@app/utils/Link';
 import Form from '@app/Forms/Form';
 import AccountForm from './AccountForm';
 import { register } from './AccountState';
+import { newToast } from '@app/Toasts/ToastsState';
 
-const RegisterForm = ({ register }) => (
+const RegisterForm = ({ register, newToast }) => (
   <AccountForm>
     <h1>Register</h1>
     <Form
@@ -17,6 +18,7 @@ const RegisterForm = ({ register }) => (
       ]}
       action="/api/account/register"
       submit={register}
+      onError={err => newToast({ ...err, type: 'error' })}
     />
     <Link to="/account/login">Login</Link>
   </AccountForm>
@@ -25,5 +27,8 @@ const RegisterForm = ({ register }) => (
 // prettier-ignore
 export default connect(
   null, 
-  dispatch => ({ register: data => dispatch(register(data)) })
+  dispatch => ({ 
+    register: data => dispatch(register(data)),
+    newToast: data => dispatch(newToast(data))
+  })
 )(RegisterForm);

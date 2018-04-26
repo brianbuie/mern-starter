@@ -5,8 +5,9 @@ import Link from '@app/utils/Link';
 import Form from '@app/Forms/Form';
 import AccountForm from './AccountForm';
 import { resetPassword } from './AccountState';
+import { newToast } from '@app/Toasts/ToastsState';
 
-const ResetPasswordForm = ({ location, resetPassword }) => (
+const ResetPasswordForm = ({ location, resetPassword, newToast }) => (
   <AccountForm>
     <h1>Reset Password</h1>
     <Form
@@ -16,6 +17,7 @@ const ResetPasswordForm = ({ location, resetPassword }) => (
         { name: 'token', type: 'hidden', value: queryString.parse(location.search).token }
       ]}
       submit={resetPassword}
+      onError={err => newToast({ ...err, type: 'error' })}
     />
     <Link to="/account/login">Login</Link>
   </AccountForm>
@@ -24,5 +26,8 @@ const ResetPasswordForm = ({ location, resetPassword }) => (
 // prettier-ignore
 export default connect(
   ({ router: { location } }) => ({ location }),
-  dispatch => ({ resetPassword: data => dispatch(resetPassword(data)) })
+  dispatch => ({ 
+    resetPassword: data => dispatch(resetPassword(data)),
+    newToast: data => dispatch(newToast(data))
+  })
 )(ResetPasswordForm);

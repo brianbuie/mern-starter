@@ -44,7 +44,7 @@ class Form extends React.Component {
     });
     const res = await this.props.submit(data);
     if (!res.ok) return this.handleError(res.data);
-    if (this.props.onSuccess) this.props.onSuccess(response.data);
+    if (this.props.onSuccess) this.props.onSuccess(res.data);
   };
 
   render = () =>
