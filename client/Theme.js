@@ -20,10 +20,10 @@ const theme = {
 };
 
 // prettier-ignore
-const ThemeProvider = ({ children }) => (
+const Theme = ({ children }) => (
   <Provider theme={theme}>
     {children}
   </Provider>
 );
 
-export default ThemeProvider;
+export default Theme;

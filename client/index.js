@@ -1,13 +1,13 @@
 import ReactDOM from 'react-dom';
-import App from '@app/App';
-import StateProvider from '@app/State/StateProvider';
-import ThemeProvider from '@app/Theme/ThemeProvider';
+import App from './App';
+import State from './State';
+import Theme from './Theme';
 
 ReactDOM.render(
-  <StateProvider>
-    <ThemeProvider>
+  <State>
+    <Theme>
       <App />
-    </ThemeProvider>
-  </StateProvider>,
+    </Theme>
+  </State>,
   document.getElementById('root')
 );
