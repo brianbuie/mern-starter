@@ -1,18 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import Link from '@app/utils/Link';
 import Form from '@app/Forms/Form';
 import AccountForm from './AccountForm';
 import { forgotPassword } from './AccountState';
 import { newToast } from '@app/Toasts/ToastsState';
 
-const ForgotPasswordForm = ({ forgotPassword, newToast }) => (
+const ForgotPasswordForm = ({ submit, newToast, redirect }) => (
   <AccountForm>
     <h1>Forgot Password</h1>
     <Form
       fields={[{ name: 'email', label: 'Email', type: 'email' }]}
-      submit={forgotPassword}
+      submit={submit}
       onError={err => newToast({ ...err, type: 'error' })}
+      onSuccess={data => {
+        newToast({ ...data, type: 'success' });
+        redirect('/account/login');
+      }}
     />
     <Link to="/account/login">Login</Link>
   </AccountForm>
@@ -22,7 +27,8 @@ const ForgotPasswordForm = ({ forgotPassword, newToast }) => (
 export default connect(
   null, 
   dispatch => ({ 
-    forgotPassword: data => dispatch(forgotPassword(data)),
-    newToast: data => dispatch(newToast(data))
+    submit: data => dispatch(forgotPassword(data)),
+    newToast: data => dispatch(newToast(data)),
+    redirect: url => dispatch(push(url))
   })
 )(ForgotPasswordForm);

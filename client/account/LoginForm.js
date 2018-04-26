@@ -6,12 +6,12 @@ import AccountForm from './AccountForm';
 import { login } from './AccountState';
 import { newToast } from '@app/Toasts/ToastsState';
 
-const LoginForm = ({ login, newToast }) => (
+const LoginForm = ({ submit, newToast }) => (
   <AccountForm>
     <h1>Login</h1>
     <Form
       fields={[{ name: 'username', label: 'Username', type: 'text' }, { name: 'password', label: 'Password', type: 'password' }]}
-      submit={login}
+      submit={submit}
       onError={err => newToast({ ...err, type: 'error' })}
     />
     <Link to="/account/register">Register</Link>
@@ -23,7 +23,7 @@ const LoginForm = ({ login, newToast }) => (
 export default connect(
   null, 
   dispatch => ({ 
-    login: data => dispatch(login(data)),
+    submit: data => dispatch(login(data)),
     newToast: data => dispatch(newToast(data))
   })
 )(LoginForm);

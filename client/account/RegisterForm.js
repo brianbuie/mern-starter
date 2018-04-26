@@ -6,7 +6,7 @@ import AccountForm from './AccountForm';
 import { register } from './AccountState';
 import { newToast } from '@app/Toasts/ToastsState';
 
-const RegisterForm = ({ register, newToast }) => (
+const RegisterForm = ({ submit, newToast }) => (
   <AccountForm>
     <h1>Register</h1>
     <Form
@@ -17,7 +17,7 @@ const RegisterForm = ({ register, newToast }) => (
         { name: 'confirm-password', label: 'Again', type: 'password' }
       ]}
       action="/api/account/register"
-      submit={register}
+      submit={submit}
       onError={err => newToast({ ...err, type: 'error' })}
     />
     <Link to="/account/login">Login</Link>
@@ -28,7 +28,7 @@ const RegisterForm = ({ register, newToast }) => (
 export default connect(
   null, 
   dispatch => ({ 
-    register: data => dispatch(register(data)),
+    submit: data => dispatch(register(data)),
     newToast: data => dispatch(newToast(data))
   })
 )(RegisterForm);

@@ -7,7 +7,7 @@ import AccountForm from './AccountForm';
 import { resetPassword } from './AccountState';
 import { newToast } from '@app/Toasts/ToastsState';
 
-const ResetPasswordForm = ({ location, resetPassword, newToast }) => (
+const ResetPasswordForm = ({ location, submit, newToast }) => (
   <AccountForm>
     <h1>Reset Password</h1>
     <Form
@@ -16,8 +16,9 @@ const ResetPasswordForm = ({ location, resetPassword, newToast }) => (
         { name: 'confirm-password', label: 'Again', type: 'password' },
         { name: 'token', type: 'hidden', value: queryString.parse(location.search).token }
       ]}
-      submit={resetPassword}
+      submit={submit}
       onError={err => newToast({ ...err, type: 'error' })}
+      onSuccess={() => newToast({ message: 'Password reset', type: 'success' })}
     />
     <Link to="/account/login">Login</Link>
   </AccountForm>
@@ -27,7 +28,7 @@ const ResetPasswordForm = ({ location, resetPassword, newToast }) => (
 export default connect(
   ({ router: { location } }) => ({ location }),
   dispatch => ({ 
-    resetPassword: data => dispatch(resetPassword(data)),
+    submit: data => dispatch(resetPassword(data)),
     newToast: data => dispatch(newToast(data))
   })
 )(ResetPasswordForm);
