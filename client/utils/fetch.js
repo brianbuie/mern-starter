@@ -1,11 +1,5 @@
 import queryString from 'query-string';
 
-const handleResponse = async res => {
-  const data = await res.json();
-  const { ok } = res;
-  return { data, ok };
-};
-
 const handleError = err => {
   console.error(err);
   return {
@@ -14,10 +8,20 @@ const handleError = err => {
   };
 };
 
+const handleResponse = async res => {
+  try {
+    const data = await res.json();
+    const { ok } = res;
+    return { data, ok };
+  } catch (err) {
+    return handleError(err);
+  }
+};
+
 export const post = (url, data) =>
   fetch(url, {
     method: 'POST',
-    body: JSON.stringify(data),
+    body: data ? JSON.stringify(data) : null,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -38,4 +42,22 @@ export const get = (url, data) => {
   })
     .then(handleResponse)
     .catch(handleError);
+};
+
+export const postLoud = (NAME, url, data = null) => dispatch => {
+  dispatch({ type: `${NAME}_REQUEST` });
+  return post(url, data).then(res => {
+    if (res.ok) dispatch({ type: `${NAME}_SUCCESS`, payload: res.data });
+    if (!res.ok) dispatch({ type: `${NAME}_FAILURE`, payload: res.data });
+    return res;
+  });
+};
+
+export const getLoud = (NAME, url, data = null) => dispatch => {
+  dispatch({ type: `${NAME}_REQUEST` });
+  return get(url, data).then(res => {
+    if (res.ok) dispatch({ type: `${NAME}_SUCCESS`, payload: res.data });
+    if (!res.ok) dispatch({ type: `${NAME}_FAILURE`, payload: res.data });
+    return res;
+  });
 };
