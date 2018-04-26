@@ -1,4 +1,3 @@
-import React from 'react';
 import { postLoud, getLoud } from '@app/utils/fetch';
 
 export const login = data => dispatch => dispatch(postLoud('LOGIN', '/api/account/login', data));

@@ -1,5 +1,3 @@
-import React from 'react';
-import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Link from '@app/utils/Link';
 import Form from '@app/Forms/Form';

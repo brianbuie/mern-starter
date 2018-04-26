@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Layout from '@app/ui/Layout';
 import Home from '@app/Pages/Home';

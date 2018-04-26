@@ -1,5 +1,3 @@
-import React from 'react';
-
 const autoHide = 5000;
 
 export const hideToast = id => ({

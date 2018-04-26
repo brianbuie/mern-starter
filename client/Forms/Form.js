@@ -1,4 +1,3 @@
-import React from 'react';
 import TextInput from './TextInput';
 import { post } from '@app/utils/fetch';
 

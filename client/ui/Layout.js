@@ -1,4 +1,3 @@
-import React from 'react';
 import Nav from '@app/Nav/Nav';
 import ToastsContainer from '@app/Toasts/ToastsContainer';
 
