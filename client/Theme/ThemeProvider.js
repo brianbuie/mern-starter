@@ -1,4 +1,3 @@
-import React from 'react';
 import { injectGlobal, ThemeProvider as Provider } from 'styled-components';
 
 injectGlobal`

@@ -1,4 +1,3 @@
-import React from 'react';
 import TextInput from './TextInput';
 import { post } from '@app/utils/fetch';
 
@@ -42,9 +41,9 @@ class Form extends React.Component {
     Object.keys(this.state).forEach(field => {
       data[field] = this.state[field].value;
     });
-    const response = await post(this.props.action, data);
-    if (!response.ok) return this.handleError(response.data);
-    if (this.props.onSuccess) this.props.onSuccess(response.data);
+    const res = await this.props.submit(data);
+    if (!res.ok) return this.handleError(res.data);
+    if (this.props.onSuccess) this.props.onSuccess(res.data);
   };
 
   render = () =>

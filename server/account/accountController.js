@@ -55,7 +55,11 @@ exports.createResetToken = async (req, res) => {
 };
 
 exports.updatePassword = async (req, res) => {
-  const user = await User.findOne({ resetPasswordToken: req.body.token });
+  const user = await User.findOne({
+    resetPasswordToken: req.body.token,
+    resetPasswordExpires: { $gt: Date.now() }
+  });
+  if (!user) return res.status(400).json({ message: 'Password reset is invalid or has expired.' });
   user.setPassword = promisify(user.setPassword);
   await user.setPassword(req.body.password);
   user.resetPasswordToken = undefined;

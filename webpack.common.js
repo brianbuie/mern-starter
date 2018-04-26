@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: ['./client/index'],
@@ -21,5 +22,12 @@ module.exports = {
         use: 'babel-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      React: 'react',
+      connect: ['react-redux', 'connect'],
+      styled: ['styled-components', 'default']
+    })
+  ]
 };

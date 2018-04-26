@@ -77,7 +77,7 @@ exports.forgotPassword = email.concat(emailExists);
 
 exports.resetToken = token;
 
-exports.updatePassword = token.concat(newPassword);
+exports.updatePassword = newPassword;
 
 exports.results = (req, res, next) => {
   const errors = validationResult(req);

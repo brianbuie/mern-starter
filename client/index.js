@@ -1,17 +1,13 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
 import App from '@app/App';
-import State from '@app/State';
-
-const history = createBrowserHistory();
+import StateProvider from '@app/State/StateProvider';
+import ThemeProvider from '@app/Theme/ThemeProvider';
 
 ReactDOM.render(
-  <State>
-    <Router history={history}>
+  <StateProvider>
+    <ThemeProvider>
       <App />
-    </Router>
-  </State>,
+    </ThemeProvider>
+  </StateProvider>,
   document.getElementById('root')
 );
