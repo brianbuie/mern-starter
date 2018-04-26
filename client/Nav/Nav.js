@@ -1,4 +1,4 @@
-import Link from '@app/utils/Link';
+import Link from '@app/ui/Link';
 import { logout } from '@app/Account/AccountState';
 
 const Menu = styled.div`

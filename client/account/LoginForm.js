@@ -1,4 +1,4 @@
-import Link from '@app/utils/Link';
+import Link from '@app/ui/Link';
 import Form from '@app/Forms/Form';
 import AccountForm from './AccountForm';
 import { login } from './AccountState';

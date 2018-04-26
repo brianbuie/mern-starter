@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import Link from '@app/utils/Link';
+import Link from '@app/ui/Link';
 import Form from '@app/Forms/Form';
 import AccountForm from './AccountForm';
 import { forgotPassword } from './AccountState';

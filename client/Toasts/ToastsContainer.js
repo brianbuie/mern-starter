@@ -1,4 +1,4 @@
-import Link from '@app/utils/Link';
+import Link from '@app/ui/Link';
 import { hideToast } from './ToastsState';
 
 const ToastsContainer = ({ toasts, hideToast }) =>

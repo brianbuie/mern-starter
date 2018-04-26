@@ -36,7 +36,7 @@ Out of the box, it has full user authentication with fancy forms and error feedb
 
 ![Form Validation example](https://i.imgur.com/DXBxINs.png)
 
-Redness goes away as soon as that field's state changes again and labels appear above when the field has a value.
+Redness goes away when you see a doctor or as soon as that field's state changes again. The labels also appear above when the field has a value.
 
 ## Redundant Imports Suck
 

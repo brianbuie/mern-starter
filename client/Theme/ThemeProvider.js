@@ -13,7 +13,10 @@ injectGlobal`
 `;
 
 const theme = {
-  primary: '#eb6f5a'
+  darkGray: '#415a6a',
+  orange: '#eb6f5a',
+  blue: '#51b7e0',
+  gold: '#caa93e'
 };
 
 // prettier-ignore
