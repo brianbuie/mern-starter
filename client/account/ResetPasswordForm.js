@@ -15,6 +15,7 @@ const ResetPasswordForm = ({ location, submit, newToast }) => (
         { name: 'token', type: 'hidden', value: queryString.parse(location.search).token }
       ]}
       submit={submit}
+      buttonText="Reset Password →"
       onError={err => newToast({ ...err, type: 'error' })}
       onSuccess={() => newToast({ message: 'Password reset', type: 'success' })}
     />

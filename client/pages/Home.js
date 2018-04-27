@@ -1,7 +1,7 @@
 import HomeIcon from '../../public/img/home.svg';
 
 const Headline = styled.h1`
-  color: ${props => props.theme.orange};
+  color: ${theme.colors.primary};
 `;
 
 const Container = styled.div`

@@ -7,8 +7,8 @@ const Input = styled.input`
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
   padding: 0.6rem 0.8rem;
   outline: none;
-  border: ${props => (props.error ? '1px solid red' : 'none')};
-  border-radius: 0.3rem;
+  border: ${props => (props.error ? '1px solid ' + theme.colors.error : 'none')};
+  border-radius: ${theme.sizes.borderRadius};
 `;
 
 const Label = styled.label`
@@ -23,7 +23,7 @@ const Label = styled.label`
 
 const Feedback = styled.p`
   font-size: 0.8rem;
-  color: red;
+  color: ${theme.colors.error};
   margin-top: 0;
   text-align: left;
   padding-left: 0.8rem;

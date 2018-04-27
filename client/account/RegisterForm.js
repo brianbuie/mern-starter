@@ -14,7 +14,7 @@ const RegisterForm = ({ submit, newToast }) => (
         { name: 'password', label: 'Password', type: 'password' },
         { name: 'confirm-password', label: 'Again', type: 'password' }
       ]}
-      action="/api/account/register"
+      buttonText="Register →"
       submit={submit}
       onError={err => newToast({ ...err, type: 'error' })}
     />

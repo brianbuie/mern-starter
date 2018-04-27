@@ -10,10 +10,15 @@ const LoginForm = ({ submit, newToast }) => (
     <Form
       fields={[{ name: 'username', label: 'Username', type: 'text' }, { name: 'password', label: 'Password', type: 'password' }]}
       submit={submit}
+      buttonText="Login →"
       onError={err => newToast({ ...err, type: 'error' })}
     />
-    <Link to="/account/register">Register</Link>
-    <Link to="/account/forgot-password">Forgot Password</Link>
+    <p>
+      Need an account? <Link to="/account/register">Register</Link>
+    </p>
+    <p>
+      <Link to="/account/forgot-password">Forgot Password?</Link>
+    </p>
   </AccountForm>
 );
 

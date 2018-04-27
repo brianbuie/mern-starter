@@ -1,16 +1,18 @@
-import Link from '@app/ui/Link';
 import { hideToast } from './ToastsState';
+import Toast from './Toast';
 
-const ToastsContainer = ({ toasts, hideToast }) =>
-  toasts.map(
-    ({ message, id, show }) =>
-      show && (
-        <div key={id}>
-          {message}
-          <Link onClick={() => hideToast(id)}>&times;</Link>
-        </div>
-      )
-  );
+const Container = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const ToastsContainer = ({ toasts, hideToast }) => (
+  <Container>{toasts.map(toast => toast.show && <Toast key={toast.id} {...toast} hide={() => hideToast(toast.id)} />)}</Container>
+);
 
 export default connect(
   ({ toasts }) => ({ toasts }),

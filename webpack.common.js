@@ -27,7 +27,8 @@ module.exports = {
     new webpack.ProvidePlugin({
       React: 'react',
       connect: ['react-redux', 'connect'],
-      styled: ['styled-components', 'default']
+      styled: ['styled-components', 'default'],
+      theme: ['@app/Theme', 'theme']
     })
   ]
 };

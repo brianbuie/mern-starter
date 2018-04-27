@@ -1,5 +1,10 @@
 import TextInput from './TextInput';
+import Button from '@app/ui/Button';
 import { post } from '@app/utils/fetch';
+
+const ButtonContainer = styled.div`
+  margin: 2rem auto;
+`;
 
 class Form extends React.Component {
   componentWillMount = () => {
@@ -36,7 +41,7 @@ class Form extends React.Component {
   };
 
   submit = async e => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     let data = {};
     Object.keys(this.state).forEach(field => {
       data[field] = this.state[field].value;
@@ -52,7 +57,11 @@ class Form extends React.Component {
         {this.props.fields.map(field => (
           <TextInput key={field.name} {...field} {...this.state[field.name]} onChange={this.fieldChange} />
         ))}
-        <button type="submit">{this.props.buttonText || 'Submit →'}</button>
+        <ButtonContainer>
+          <Button block color="success" type="submit">
+            {this.props.buttonText || 'Submit →'}
+          </Button>
+        </ButtonContainer>
       </form>
     );
 }
