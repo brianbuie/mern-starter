@@ -1,4 +1,5 @@
 import TextInput from './TextInput';
+import Checkbox from './Checkbox';
 import Button from '@app/ui/Button';
 import { post } from '@app/utils/fetch';
 
@@ -18,10 +19,10 @@ class Form extends React.Component {
     this.setState(state);
   };
 
-  fieldChange = e => {
+  fieldChange = (name, value) => {
     this.setState({
-      [e.target.name]: {
-        value: e.target.value,
+      [name]: {
+        value,
         error: null
       }
     });
@@ -41,12 +42,14 @@ class Form extends React.Component {
   };
 
   submit = async e => {
-    if (e && e.preventDefault) e.preventDefault();
+    e.preventDefault();
     let data = {};
     Object.keys(this.state).forEach(field => {
       data[field] = this.state[field].value;
     });
     const res = await this.props.submit(data);
+    console.log(res);
+    if (!res || !res.data) return;
     if (!res.ok) return this.handleError(res.data);
     if (this.props.onSuccess) this.props.onSuccess(res.data);
   };
@@ -54,9 +57,15 @@ class Form extends React.Component {
   render = () =>
     this.state && (
       <form onSubmit={this.submit}>
-        {this.props.fields.map(field => (
-          <TextInput key={field.name} {...field} {...this.state[field.name]} onChange={this.fieldChange} />
-        ))}
+        {this.props.fields.map(field => {
+          const { name, type } = field;
+          switch (type) {
+            case 'checkbox':
+              return <Checkbox key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
+            default:
+              return <TextInput key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
+          }
+        })}
         <ButtonContainer>
           <Button block color="success" type="submit">
             {this.props.buttonText || 'Submit →'}

@@ -1,3 +1,5 @@
+import FieldError from './FieldError';
+
 const Input = styled.input`
   display: block;
   width: 100%;
@@ -21,24 +23,24 @@ const Label = styled.label`
   transition: all 0.2s ease-in-out;
 `;
 
-const Feedback = styled.p`
-  font-size: 0.8rem;
-  color: ${theme.colors.error};
-  margin-top: 0;
-  text-align: left;
-  padding-left: 0.8rem;
-  max-height: ${props => (props.show ? '2rem' : '0')};
-  transition: all 0.2s ease-in-out;
-`;
+class TextInput extends React.Component {
+  onChange = e => {
+    if (!this.props.onChange) return;
+    this.props.onChange(this.props.name, e.target.value);
+  };
 
-const TextInput = ({ type, name, value, label, error, onChange }) => (
-  <React.Fragment>
-    <Label show={value} htmlFor={name}>
-      {label}
-    </Label>
-    <Input {...{ type, name, value, onChange, error }} placeholder={label} />
-    <Feedback show={error}>{error}</Feedback>
-  </React.Fragment>
-);
+  render = () => {
+    const { name, value, label, error, placeHolder } = this.props;
+    return (
+      <React.Fragment>
+        <Label show={value} htmlFor={name}>
+          {label}
+        </Label>
+        <Input {...this.props} id={name} placeholder={placeHolder || label} onChange={this.onChange} />
+        <FieldError show={error}>{error}</FieldError>
+      </React.Fragment>
+    );
+  };
+}
 
 export default TextInput;
