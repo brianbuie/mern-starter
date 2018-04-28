@@ -1,5 +1,6 @@
 import TextInput from './TextInput';
 import Checkbox from './Checkbox';
+import RadioButtons from './RadioButtons';
 import Button from '@app/ui/Button';
 import { post } from '@app/utils/fetch';
 
@@ -62,6 +63,8 @@ class Form extends React.Component {
           switch (type) {
             case 'checkbox':
               return <Checkbox key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
+            case 'radio':
+              return <RadioButtons key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
             default:
               return <TextInput key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
           }

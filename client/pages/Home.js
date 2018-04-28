@@ -20,7 +20,12 @@ const Home = () => (
     <Form
       fields={[
         { name: 'text', label: 'Text', type: 'text' },
-        { name: 'checkity', label: 'Checkbox', type: 'checkbox', value: 'something' }
+        { name: 'checkity', label: 'Checkbox', type: 'checkbox' },
+        { name: 'radios', type: 'radio', options: [
+          { label: 'option 1', value: 'v1' },
+          { label: 'option 2', value: 'v2' },
+          { label: 'option 3', value: 'v3' }
+        ] }
       ]}
       submit={data => !console.log(data) && ({ 
         ok: false, 
