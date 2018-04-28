@@ -28,7 +28,9 @@ const Home = () => (
         { name: 'select', type: 'select', label: 'Select an Option', options: [
           { label: 'option 1', value: 'option1' },
           { label: 'option 2', value: 'option2' }
-        ] }
+        ] },
+        { name: 'date', type: 'date', label: 'Select a Date', value: 'default' },
+        { name: 'longanswer', type: 'textarea', label: 'Write an Essay' }
       ]}
       submit={data => !console.log(data) && ({ 
         ok: false, 

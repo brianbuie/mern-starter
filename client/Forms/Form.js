@@ -2,6 +2,7 @@ import TextInput from './TextInput';
 import Checkbox from './Checkbox';
 import RadioButtons from './RadioButtons';
 import SelectInput from './SelectInput';
+import Textarea from './Textarea';
 import Button from '@app/ui/Button';
 import { post } from '@app/utils/fetch';
 
@@ -60,15 +61,18 @@ class Form extends React.Component {
       <form onSubmit={this.submit}>
         {this.props.fields.map(field => {
           const { name, type } = field;
+          const props = { ...field, ...this.state[name] };
           switch (type) {
             case 'checkbox':
-              return <Checkbox key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
+              return <Checkbox key={name} {...props} onChange={this.fieldChange} />;
             case 'radio':
-              return <RadioButtons key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
+              return <RadioButtons key={name} {...props} onChange={this.fieldChange} />;
             case 'select':
-              return <SelectInput key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
+              return <SelectInput key={name} {...props} onChange={this.fieldChange} />;
+            case 'textarea':
+              return <Textarea key={name} {...props} onChange={this.fieldChange} />;
             default:
-              return <TextInput key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
+              return <TextInput key={name} {...props} onChange={this.fieldChange} />;
           }
         })}
         <ButtonContainer>
