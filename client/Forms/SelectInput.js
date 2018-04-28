@@ -1,7 +1,7 @@
 import FieldError from './FieldError';
 import MagicLabel from './MagicLabel';
 
-const Input = styled.input`
+const Input = styled.select`
   display: block;
   width: 100%;
   font-size: 1.2rem;
@@ -14,24 +14,33 @@ const Input = styled.input`
   border-radius: ${theme.sizes.borderRadius};
 `;
 
-class TextInput extends React.Component {
+class SelectInput extends React.Component {
   onChange = e => {
     if (!this.props.onChange) return;
     this.props.onChange(this.props.name, e.target.value);
   };
 
   render = () => {
-    const { name, value, label, error, placeHolder } = this.props;
+    const { name, value, label, error, options, placeHolder } = this.props;
     return (
       <React.Fragment>
         <MagicLabel show={value} htmlFor={name}>
           {label}
         </MagicLabel>
-        <Input {...this.props} id={name} placeholder={placeHolder || label} onChange={this.onChange} />
+        <Input id={name} error={error} value={value} onChange={this.onChange}>
+          <option value="" disabled>
+            {label}
+          </option>
+          {options.map(option => (
+            <option value={option.value} key={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </Input>
         <FieldError show={error}>{error}</FieldError>
       </React.Fragment>
     );
   };
 }
 
-export default TextInput;
+export default SelectInput;

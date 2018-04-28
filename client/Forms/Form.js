@@ -1,6 +1,7 @@
 import TextInput from './TextInput';
 import Checkbox from './Checkbox';
 import RadioButtons from './RadioButtons';
+import SelectInput from './SelectInput';
 import Button from '@app/ui/Button';
 import { post } from '@app/utils/fetch';
 
@@ -49,7 +50,6 @@ class Form extends React.Component {
       data[field] = this.state[field].value;
     });
     const res = await this.props.submit(data);
-    console.log(res);
     if (!res || !res.data) return;
     if (!res.ok) return this.handleError(res.data);
     if (this.props.onSuccess) this.props.onSuccess(res.data);
@@ -65,6 +65,8 @@ class Form extends React.Component {
               return <Checkbox key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
             case 'radio':
               return <RadioButtons key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
+            case 'select':
+              return <SelectInput key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
             default:
               return <TextInput key={name} {...field} {...this.state[name]} onChange={this.fieldChange} />;
           }
