@@ -9,7 +9,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@app': path.resolve(__dirname, 'client')
+      '@app': path.resolve(__dirname, 'client'),
+      '@public': path.resolve(__dirname, 'public')
     },
     mainFiles: ['index'],
     modules: ['node_modules']
@@ -20,6 +21,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.svg$/,
+        use: 'raw-loader'
       }
     ]
   },
@@ -28,7 +33,8 @@ module.exports = {
       React: 'react',
       connect: ['react-redux', 'connect'],
       styled: ['styled-components', 'default'],
-      theme: ['@app/Theme', 'theme']
+      theme: ['@app/Theme', 'theme'],
+      SVG: ['react-svg-inline', 'default']
     })
   ]
 };

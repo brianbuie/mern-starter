@@ -18,7 +18,7 @@ const Checkmark = styled.span`
   height: 50%;
   border-right: 2px solid white;
   border-bottom: 2px solid white;
-  transform: rotate(45deg) translateY(-15%) translateX(-15%);
+  transform: rotate(45deg) translateY(-10%) translateX(-10%);
   transform-origin: center;
   opacity: ${props => (props.value ? 1 : 0)};
   transition: all 0.1s ease-in-out;

@@ -1,4 +1,4 @@
-import HomeIcon from '../../public/img/home.svg';
+import HomeIcon from '@public/img/home.svg';
 import Form from '@app/Forms/Form';
 
 const Headline = styled.h1`
@@ -12,10 +12,24 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Icon = styled(SVG)`
+  svg {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto;
+  }
+`;
+
 // prettier-ignore
 const Home = () => (
   <Container>
-    <HomeIcon />
+    <Icon svg={HomeIcon} />
     <Headline>Example Form</Headline>
     <Form
       fields={[
