@@ -1,4 +1,4 @@
-import { postLoud, getLoud } from '@app/utils/fetch';
+import { get, postLoud, getLoud } from '@app/utils/fetch';
 
 export const login = data => dispatch => dispatch(postLoud('LOGIN', '/api/account/login', data));
 
@@ -10,7 +10,7 @@ export const resetPassword = data => dispatch => dispatch(postLoud('RESET_PASSWO
 
 export const logout = () => dispatch => dispatch(postLoud('LOGOUT', '/api/account/logout'));
 
-export default function reducer(state = null, action) {
+const reducer = (state = null, action) => {
   const { type, payload } = action;
   switch (type) {
     case 'LOGIN_SUCCESS':
@@ -24,4 +24,12 @@ export default function reducer(state = null, action) {
     default:
       return state;
   }
-}
+};
+
+const getInitialState = async () => {
+  const { data, ok } = await get('/api/account');
+  if (!data || !ok) return {};
+  return data;
+};
+
+export default { reducer, getInitialState };

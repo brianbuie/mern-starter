@@ -15,7 +15,7 @@ export const newToast = toast => dispatch => {
   setTimeout(() => dispatch(hideToast(id)), autoHide);
 };
 
-export default function reducer(state = [], action) {
+const reducer = (state = [], action) => {
   const { type, payload } = action;
   switch (type) {
     case 'NEW_TOAST':
@@ -28,4 +28,6 @@ export default function reducer(state = [], action) {
     default:
       return state;
   }
-}
+};
+
+export default { reducer };
