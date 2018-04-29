@@ -46,10 +46,10 @@ class Form extends React.Component {
 
   submit = async e => {
     e.preventDefault();
-    let data = {};
-    Object.keys(this.state).forEach(field => {
-      data[field] = this.state[field].value;
-    });
+    let data = Object.entries(this.state).reduce((data, [name, { value }]) => {
+      data[name] = value;
+      return data;
+    }, {});
     const res = await this.props.submit(data);
     if (!res || !res.data) return;
     if (!res.ok) return this.handleError(res.data);
@@ -61,18 +61,18 @@ class Form extends React.Component {
       <form onSubmit={this.submit}>
         {this.props.fields.map(field => {
           const { name, type } = field;
-          const props = { ...field, ...this.state[name] };
+          const props = { ...field, ...this.state[name], key: name, onChange: this.fieldChange };
           switch (type) {
             case 'checkbox':
-              return <Checkbox key={name} {...props} onChange={this.fieldChange} />;
+              return <Checkbox {...props} />;
             case 'radio':
-              return <RadioButtons key={name} {...props} onChange={this.fieldChange} />;
+              return <RadioButtons {...props} />;
             case 'select':
-              return <SelectInput key={name} {...props} onChange={this.fieldChange} />;
+              return <SelectInput {...props} />;
             case 'textarea':
-              return <Textarea key={name} {...props} onChange={this.fieldChange} />;
+              return <Textarea {...props} />;
             default:
-              return <TextInput key={name} {...props} onChange={this.fieldChange} />;
+              return <TextInput {...props} />;
           }
         })}
         <ButtonContainer>

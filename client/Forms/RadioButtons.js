@@ -1,14 +1,4 @@
-import FieldError from './FieldError';
-
-const Input = styled.input`
-  display: none;
-`;
-
-const Label = styled.label`
-  margin: 1.25rem 0 0.3rem 0;
-  display: flex;
-  align-items: flex-end;
-`;
+import { FieldError, InvisibleInput, InlineLabel } from './InputAddons';
 
 const Doughnut = styled.span`
   background: ${props => (props.value ? theme.colors.primary : 'white')};
@@ -24,8 +14,8 @@ const Doughnut = styled.span`
 `;
 
 const Hole = styled.span`
-  width: 40%;
-  height: 40%;
+  width: 30%;
+  height: 30%;
   border-radius: 50%;
   background: white;
   opacity: ${props => (props.value ? 1 : 0)};
@@ -44,13 +34,13 @@ class RadioButtons extends React.Component {
       <React.Fragment>
         {label && <p>{label}</p>}
         {options.map(option => (
-          <Label key={option.value}>
+          <InlineLabel key={option.value}>
             <Doughnut value={option.value === value}>
               <Hole value={option.value === value} />
             </Doughnut>
-            <Input type="radio" name={name} value={option.value} onChange={this.onChange} checked={option.value === value} />
+            <InvisibleInput type="radio" value={option.value} onChange={this.onChange} checked={option.value === value} />
             {option.label}
-          </Label>
+          </InlineLabel>
         ))}
         <FieldError show={error}>{error}</FieldError>
       </React.Fragment>

@@ -1,5 +1,4 @@
-import FieldError from './FieldError';
-import MagicLabel from './MagicLabel';
+import { FieldError, MagicLabel } from './InputAddons';
 
 const Input = styled.select`
   display: block;
@@ -21,7 +20,7 @@ class SelectInput extends React.Component {
   };
 
   render = () => {
-    const { name, value, label, error, options, placeHolder } = this.props;
+    const { name, value, label, error, placeHolder, options } = this.props;
     return (
       <React.Fragment>
         <MagicLabel show={value} htmlFor={name}>

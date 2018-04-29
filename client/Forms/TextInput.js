@@ -1,5 +1,4 @@
-import FieldError from './FieldError';
-import MagicLabel from './MagicLabel';
+import { FieldError, MagicLabel } from './InputAddons';
 
 const Input = styled.input`
   display: block;

@@ -1,14 +1,4 @@
-import FieldError from './FieldError';
-
-const Input = styled.input`
-  display: none;
-`;
-
-const Label = styled.label`
-  margin: 1.25rem 0 0.3rem 0;
-  display: flex;
-  align-items: flex-end;
-`;
+import { FieldError, InvisibleInput, InlineLabel } from './InputAddons';
 
 const Box = styled.span`
   background: ${props => (props.value ? theme.colors.primary : 'white')};
@@ -28,7 +18,7 @@ const Checkmark = styled.span`
   height: 50%;
   border-right: 2px solid white;
   border-bottom: 2px solid white;
-  transform: rotate(45deg);
+  transform: rotate(45deg) translateY(-15%) translateX(-15%);
   transform-origin: center;
   opacity: ${props => (props.value ? 1 : 0)};
   transition: all 0.1s ease-in-out;
@@ -44,13 +34,13 @@ class Checkbox extends React.Component {
     const { name, label, error, value } = this.props;
     return (
       <React.Fragment>
-        <Label>
+        <InlineLabel>
           <Box value={value}>
             <Checkmark value={value} />
           </Box>
-          <Input type="checkbox" onChange={this.onChange} checked={value} />
+          <InvisibleInput type="checkbox" onChange={this.onChange} checked={value} />
           {label}
-        </Label>
+        </InlineLabel>
         <FieldError show={error}>{error}</FieldError>
       </React.Fragment>
     );
